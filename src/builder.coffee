@@ -64,7 +64,7 @@ class exports.Builder
 
           # Case #2 Char data (CDATA, etc.)
           else if key is charkey
-            if @options.cdata is 'always' or (@options.cdata && requiresCDATA child)
+            if typeof child is 'string' && (@options.cdata is 'always' or (@options.cdata && requiresCDATA child))
               element = element.raw wrapCDATA child
             else
               element = element.txt child
@@ -86,7 +86,7 @@ class exports.Builder
 
           # Case #5 String and remaining types
           else
-            if typeof child is 'string' && @options.cdata is 'always' or (@options.cdata && requiresCDATA child)
+            if typeof child is 'string' && (@options.cdata is 'always' or (@options.cdata && requiresCDATA child))
               element = element.ele(key).raw(wrapCDATA child).up()
             else
               if not child?
